@@ -81,8 +81,8 @@ export function BattleScreen({
       </div>
 
       {state.winnerTeamId && (
-        <div className="card" style={{ marginTop: 12, background: "rgba(255,255,255,0.10)" }}>
-          Winner: {teams.find((t) => t.id === state.winnerTeamId)?.name ?? state.winnerTeamId}
+        <div className="card" style={{ marginTop: 12, background: "var(--accent-faint)", borderColor: "var(--accent)" }}>
+          <span style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif", fontWeight: 700, color: "var(--accent)" }}>Winner:</span> {teams.find((t) => t.id === state.winnerTeamId)?.name ?? state.winnerTeamId}
         </div>
       )}
 
@@ -113,7 +113,7 @@ export function BattleScreen({
 
       <div style={{ height: 16 }} />
 
-      <div className="card" style={{ background: "rgba(0,0,0,0.18)" }}>
+      <div className="card" style={{ background: "var(--bg-card-alt)" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
           <div style={{ fontWeight: 800 }}>Battle Log</div>
           <div style={{ fontSize: 12, opacity: 0.75 }}>{state.log.length} lines</div>

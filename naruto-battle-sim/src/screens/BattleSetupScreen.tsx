@@ -57,11 +57,11 @@ export function BattleSetupScreen({
               value={teamCount}
               onChange={(e) => setTeamCount(Number(e.target.value) as 2 | 3)}
               style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.12)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
                 color: "inherit",
-                borderRadius: 12,
-                padding: "10px 12px",
+                borderRadius: 6,
+                padding: "8px 12px",
               }}
             >
               <option value={2}>2</option>
@@ -116,12 +116,13 @@ export function BattleSetupScreen({
                     onClick={() => toggleMember(t.id, n.id)}
                     style={{
                       textAlign: "left",
-                      borderRadius: 12,
+                      borderRadius: 6,
                       padding: "10px 12px",
-                      border: `1px solid ${selected ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.12)"}`,
-                      background: selected ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.06)",
-                      color: "inherit",
+                      border: `1px solid ${selected ? "var(--accent)" : "var(--border-light)"}`,
+                      background: selected ? "var(--accent-faint)" : "var(--bg-card-alt)",
+                      color: selected ? "var(--accent)" : "inherit",
                       cursor: "pointer",
+                      transition: "all 0.15s",
                     }}
                   >
                     <div style={{ fontWeight: 800, fontSize: 14 }}>{n.name}</div>

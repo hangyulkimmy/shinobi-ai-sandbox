@@ -924,6 +924,7 @@ reg(nid("Zetsu"), [
         summons: [],
         abilityState: { ...ctx.fighter.abilityState, triggered: false, extraLives: 0 },
         moveUses: {},
+        recentMoves: [],
         transformed: false,
         turnFlags: { actedThisTurn: false, canAct: true, guardActive: false },
       };

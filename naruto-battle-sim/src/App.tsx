@@ -38,9 +38,9 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-inner">
           <div>
-            <div className="brand-title">Naruto Battle Sim</div>
+            <div className="brand-title">NARUTO <span style={{ color: 'var(--accent)' }}>BATTLE SIM</span></div>
             <div className="brand-sub">
-              React renders. CSS loads. Next: plug your screens back in.
+              Turn-based shinobi combat simulator
             </div>
           </div>
 

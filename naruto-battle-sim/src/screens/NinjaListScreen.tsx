@@ -33,21 +33,20 @@ export function NinjaListScreen({
           <div key={n.id} className="card">
             <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
               <div>
-                <div style={{ fontWeight: 800 }}>{n.name}</div>
-                <div style={{ opacity: 0.8, fontSize: 12 }}>{n.category}</div>
+                <div style={{ fontFamily: "'Zen Kaku Gothic New', sans-serif", fontWeight: 700, fontSize: 14 }}>{n.name}</div>
+                <div style={{ color: "var(--text-faint)", fontSize: 12, fontWeight: 500, letterSpacing: "0.03em", textTransform: "uppercase" as const }}>{n.category}</div>
               </div>
-              <div style={{ opacity: 0.7, fontSize: 12, textAlign: "right" }}>
+              <div style={{ color: "var(--text-muted)", fontSize: 12, textAlign: "right", fontVariantNumeric: "tabular-nums" }}>
                 HP {n.hp} <br />
                 CHK {n.chk}
               </div>
             </div>
 
-            <div style={{ marginTop: 10, opacity: 0.9, fontSize: 12 }}>
+            <div style={{ marginTop: 10, color: "var(--text-muted)", fontSize: 12, fontVariantNumeric: "tabular-nums" }}>
               ATK {n.atk} | CTR {n.ctr} | DEF {n.def} | SPD {n.spd}
             </div>
 
-            <div style={{ marginTop: 10, opacity: 0.8, fontSize: 12 }}>
-              {/* pick the correct field name */}
+            <div style={{ marginTop: 10, color: "var(--text-faint)", fontSize: 12, lineHeight: 1.5 }}>
               {"abilityText" in n ? (n as any).abilityText : (n as any).ability ?? ""}
             </div>
           </div>
