@@ -1,15 +1,751 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shinobi AI Sandbox</title>
-    <script type="module" crossorigin src="./assets/index-B4qDBtd7.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CnRpRnO0.css">
-  </head>
-  <body>
-    <div id="root"></div>
-    <a href="./codex.html" style="position:fixed;bottom:16px;right:16px;background:#c0392b;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-family:system-ui,sans-serif;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.2)">Shinobi Codex</a>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shinobi Codex</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗡️</text></svg>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root {
+  --bg: #f5f2ed;
+  --bg-card: #ffffff;
+  --bg-card-alt: #faf8f5;
+  --text: #2a2520;
+  --text-muted: #6b6056;
+  --text-faint: #9a8f82;
+  --accent: #c0392b;
+  --accent-faint: rgba(192, 57, 43, 0.08);
+  --border: #e0dbd4;
+  --border-light: #ece8e2;
+  --tag-t-bg: #e8d5c4;
+  --tag-t-text: #7a5230;
+  --tag-n-bg: #c8dce8;
+  --tag-n-text: #2a5070;
+  --tag-s-bg: #c8e0c8;
+  --tag-s-text: #2a5e2a;
+  --tag-g-bg: #d8c8e0;
+  --tag-g-text: #5a2a7a;
+  --stat-bar: #d4cfc8;
+  --stat-fill: #8b7e70;
+  --hp-fill: #6aab6a;
+  --chk-fill: #5a8ab5;
+  --shadow: 0 1px 3px rgba(42,37,32,0.06);
+  --shadow-hover: 0 4px 12px rgba(42,37,32,0.1);
+  --village-leaf: #3a7a3a;
+  --village-sand: #b8963a;
+  --village-mist: #4a7a8a;
+  --village-cloud: #6a6aaa;
+  --village-stone: #8a6a4a;
+  --village-other: #7a7a7a;
+  --portrait-bg: #e8e4de;
+  --portrait-text: #8a7e70;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a1816;
+    --bg-card: #242120;
+    --bg-card-alt: #2a2725;
+    --text: #e8e2da;
+    --text-muted: #a09686;
+    --text-faint: #706658;
+    --accent: #e05a4a;
+    --accent-faint: rgba(224,90,74,0.12);
+    --border: #3a3530;
+    --border-light: #302c28;
+    --tag-t-bg: #3a2e22;
+    --tag-t-text: #d4a878;
+    --tag-n-bg: #1e2e3a;
+    --tag-n-text: #7ab0d8;
+    --tag-s-bg: #1e301e;
+    --tag-s-text: #7ac07a;
+    --tag-g-bg: #2a1e3a;
+    --tag-g-text: #b080d0;
+    --stat-bar: #302c28;
+    --stat-fill: #706658;
+    --hp-fill: #4a8a4a;
+    --chk-fill: #4070a0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.3);
+    --village-leaf: #5aaa5a;
+    --village-sand: #d0aa50;
+    --village-mist: #5a9aaa;
+    --village-cloud: #8a8acc;
+    --village-stone: #aa8a6a;
+    --village-other: #9a9a9a;
+    --portrait-bg: #302c28;
+    --portrait-text: #706658;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #1a1816;
+  --bg-card: #242120;
+  --bg-card-alt: #2a2725;
+  --text: #e8e2da;
+  --text-muted: #a09686;
+  --text-faint: #706658;
+  --accent: #e05a4a;
+  --accent-faint: rgba(224,90,74,0.12);
+  --border: #3a3530;
+  --border-light: #302c28;
+  --tag-t-bg: #3a2e22;
+  --tag-t-text: #d4a878;
+  --tag-n-bg: #1e2e3a;
+  --tag-n-text: #7ab0d8;
+  --tag-s-bg: #1e301e;
+  --tag-s-text: #7ac07a;
+  --tag-g-bg: #2a1e3a;
+  --tag-g-text: #b080d0;
+  --stat-bar: #302c28;
+  --stat-fill: #706658;
+  --hp-fill: #4a8a4a;
+  --chk-fill: #4070a0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.3);
+  --village-leaf: #5aaa5a;
+  --village-sand: #d0aa50;
+  --village-mist: #5a9aaa;
+  --village-cloud: #8a8acc;
+  --village-stone: #aa8a6a;
+  --village-other: #9a9a9a;
+  --portrait-bg: #302c28;
+  --portrait-text: #706658;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', system-ui, sans-serif;
+  padding: 0 16px;
+  padding-block: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-block: 48px 32px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 40px);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.page-header h1 span {
+  color: var(--accent);
+}
+
+.page-header .subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+.page-header .stat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-faint);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.controls {
+  max-width: 960px;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-box:focus { border-color: var(--accent); }
+.search-box::placeholder { color: var(--text-faint); }
+
+.filter-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--text-faint); color: var(--text); }
+.filter-btn.active {
+  background: var(--accent-faint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.count {
+  font-size: 13px;
+  color: var(--text-faint);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.ninja-grid {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 64px;
+}
+
+.ninja-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.ninja-card:hover { box-shadow: var(--shadow-hover); }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.portrait {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid var(--border);
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portrait-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--portrait-bg);
+  color: var(--portrait-text);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.village-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.card-name {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.card-village {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+
+.stat-pips {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.stat-pip {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--stat-bar);
+  position: relative;
+  overflow: hidden;
+}
+.stat-pip .fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--stat-fill);
+  transform-origin: left;
+}
+
+.expand-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--text-faint);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.ninja-card.open .expand-icon { transform: rotate(180deg); }
+
+.card-body {
+  display: none;
+  border-top: 1px solid var(--border-light);
+}
+.ninja-card.open .card-body { display: block; }
+
+.card-body-inner {
+  padding: 16px 20px 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .card-body-inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card-header { gap: 8px; padding: 10px 14px; }
+  .card-village { display: none; }
+}
+
+.stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  width: 32px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+
+.stat-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--stat-bar);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.stat-val {
+  width: 28px;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.ability-box {
+  margin-top: 4px;
+  padding: 10px 12px;
+  background: var(--accent-faint);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+
+.ability-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.ability-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.moves-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.moves-heading {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 2px;
+}
+
+.move-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: var(--bg-card-alt);
+}
+
+.move-cat {
+  display: inline-block;
+  width: 22px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.move-cat-T { background: var(--tag-t-bg); color: var(--tag-t-text); }
+.move-cat-N { background: var(--tag-n-bg); color: var(--tag-n-text); }
+.move-cat-S { background: var(--tag-s-bg); color: var(--tag-s-text); }
+.move-cat-G { background: var(--tag-g-bg); color: var(--tag-g-text); }
+
+.move-info {
+  min-width: 0;
+}
+
+.move-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.move-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.move-stats {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-faint);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.no-results {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-faint);
+  font-size: 15px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>SHINOBI <span>CODEX</span></h1>
+  <div class="subtitle">Complete roster reference &mdash; 48 playable shinobi</div>
+  <div class="stat-legend">
+    <span>HP &middot; Health</span>
+    <span>CHK &middot; Chakra</span>
+    <span>ATK &middot; Attack</span>
+    <span>CTR &middot; Control</span>
+    <span>DEF &middot; Defense</span>
+    <span>SPD &middot; Speed</span>
+  </div>
+</div>
+
+<div class="controls">
+  <input type="text" class="search-box" placeholder="Search by name or move..." id="search">
+  <div class="filter-group" id="filters"></div>
+  <div class="count" id="count"></div>
+</div>
+
+<div class="ninja-grid" id="grid"></div>
+
+<script>
+const PORTRAITS = {
+  'tsunade':'4/57574.jpg','killer-b':'15/25316.jpg','orochimaru':'9/161411.jpg',
+  'kisame':'5/58058.jpg','minato':'13/113205.jpg','pain':'6/112926.jpg',
+  'a-raikage':'4/64070.jpg','kakashi':'7/284129.jpg','jiraiya':'7/4716.jpg',
+  'naruto':'2/284121.jpg','gaara':'8/241693.jpg','sasuke':'9/131317.jpg',
+  'itachi':'3/99543.jpg','might-guy':'4/93314.jpg','kakuzu':'3/64831.jpg',
+  'yamato':'5/51484.jpg','sakura':'9/69275.jpg','kabuto':'12/50528.jpg',
+  'obito':'8/330539.jpg','rock-lee':'11/305121.jpg','neji':'8/109118.jpg',
+  'hinata':'6/278736.jpg','suigetsu':'12/115223.jpg','choji':'6/96229.jpg',
+  'hiruzen':'3/49476.jpg','mei':'10/49477.jpg','sasori':'5/47055.jpg',
+  'jugo':'10/403552.jpg','asuma':'4/120829.jpg','konan':'15/8463.jpg',
+  'sai':'9/75665.jpg','shizune':'8/35878.jpg','shino':'4/633979.jpg',
+  'temari':'9/97646.jpg','karin':'10/115212.jpg','shikamaru':'9/95058.jpg',
+  'ino':'16/95325.jpg','kankuro':'15/43361.jpg','zetsu':'10/76897.jpg',
+  'kurenai':'10/76698.jpg','kiba':'13/96820.jpg','deidara':'13/47053.jpg',
+  'chiyo':'12/49478.jpg','hidan':'7/100481.jpg','tenten':'13/96107.jpg'
+};
+
+function portraitHTML(id, name) {
+  const path = PORTRAITS[id];
+  if (path) {
+    const url = 'https://cdn.myanimelist.net/images/characters/' + path;
+    const initials = name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+    return '<div class="portrait"><img src="' + url + '" alt="' + name + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.innerHTML=\'<div class=portrait-fallback>' + initials + '</div>\'"></div>';
+  }
+  const initials = name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+  return '<div class="portrait"><div class="portrait-fallback">' + initials + '</div></div>';
+}
+
+const NINJAS = [
+  {id:"tsunade",name:"Tsunade",category:"Leaf",hp:290,chk:150,atk:150,ctr:150,def:140,spd:116,abilityText:"Antidote:\nPoison is cured after 1 round.\nIf affected by Genjutsu (Disorient),\nits duration is reduced by 1 round.",moves:[{name:"Mystical Palm",cat:"S",power:null,acc:100,chk:20,desc:"Heal anybody 20hp"},{name:"Creation Rebirth",cat:"S",power:null,acc:100,chk:100,desc:"Heal somebody to full health but stunned for 2 turns"},{name:"A Flick",cat:"T",power:25,acc:95,chk:10,desc:"Flick an opponent for 10 dmg (stun 30%)"},{name:"Chakra Enhanced Punch",cat:"T",power:40,acc:100,chk:20,desc:"Punch an opponent for 20 dmg"},{name:"Chakra Enhanced Earthquake",cat:"N",power:40,acc:100,chk:30,desc:"AOE — Cause an earthquake for 20 dmg"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"killer-b",name:"Killer B",category:"Cloud",hp:280,chk:150,atk:142,ctr:138,def:138,spd:136,abilityText:"Gyuki Boost:\nHeals 20% of max HP when transformed",moves:[{name:"Lightning Lariat",cat:"T",power:45,acc:95,chk:20,desc:"Rush strike (stun 20%)"},{name:"Kenjutsu Flurry",cat:"T",power:32,acc:100,chk:10,desc:"Sword combo"},{name:"Ink Splash",cat:"N",power:20,acc:100,chk:20,desc:"AOE ink hit: lower Speed -10 permanently (100%)"},{name:"Version 2 Cloak",cat:"S",power:null,acc:100,chk:25,desc:"Transform permanently (ATK +15, DEF +10, Speed -15). Take 5 dmg every turn. On transform: heal 20% max HP once"},{name:"Tailed Beast Bomb",cat:"N",power:90,acc:85,chk:70,desc:"AOE finisher (only usable while transformed)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"orochimaru",name:"Orochimaru",category:"Leaf",hp:280,chk:150,atk:116,ctr:142,def:142,spd:128,abilityText:"Serpent Escape:\nNegate stun for 20 CHK once",moves:[{name:"Poison Fangs",cat:"N",power:25,acc:95,chk:20,desc:"Bite attack. Poison 60%"},{name:"Snake Swarm",cat:"N",power:60,acc:90,chk:45,desc:"AOE snake barrage. Poison 40%"},{name:"Summon: Manda (Guard)",cat:"S",power:null,acc:100,chk:40,desc:"Summon Manda: Orochimaru takes 40% less damage until Manda blocks 60 total damage"},{name:"Curse Mark",cat:"N",power:null,acc:90,chk:45,desc:"Increases target ATK by 30% and applies Curse"},{name:"Manda: Constriction",cat:"N",power:65,acc:90,chk:35,desc:"If Manda is active: damage / reduce target Speed -15 for 2 turns"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kisame",name:"Kisame Hoshigaki",category:"Mist",hp:290,chk:145,atk:130,ctr:113,def:148,spd:130,abilityText:"Shark Skin:\nAny [T] hit drains up to 8 CHK from the target\nand restores his CHK by that amount",moves:[{name:"Samehada Slash",cat:"T",power:40,acc:100,chk:20,desc:"Slash (triggers CHK drain)"},{name:"Shark Rush",cat:"T",power:32,acc:100,chk:10,desc:"Rush hit (triggers CHK drain)"},{name:"Water Shark Bomb",cat:"N",power:75,acc:90,chk:45,desc:"Heavy water strike"},{name:"Water Prison Jutsu",cat:"S",power:null,acc:80,chk:55,desc:"80% hit: Stun 2 turns; Kisame N-only 2 turns"},{name:"Water Clone Jutsu",cat:"S",power:null,acc:100,chk:40,desc:"Create 1-hit clone for 15 HP"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"minato",name:"Minato Namikaze",category:"Leaf",hp:260,chk:145,atk:118,ctr:145,def:118,spd:150,abilityText:"Flying Raijin Mastery:\nIf the target is a Marked enemy,\nhis move costs 30% less CHK (rounded down)",moves:[{name:"Flying Raijin Slash",cat:"T",power:35,acc:100,chk:10,desc:"Quick slash"},{name:"Rasengan",cat:"N",power:75,acc:90,chk:45,desc:"Heavy single hit"},{name:"Flying Raijin Mark",cat:"S",power:null,acc:100,chk:15,desc:"Mark target (3 turns); marked target SPD -10 (2 turns)"},{name:"Flash Step Assault",cat:"N",power:40,acc:100,chk:20,desc:"+50% BP if target is Marked"},{name:"Flying Raijin Escape",cat:"S",power:null,acc:100,chk:35,desc:"The chosen ally will dodge the next single-target hit within 2 turns"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"pain",name:"Pain",category:"Mist",hp:260,chk:150,atk:120,ctr:140,def:134,spd:122,abilityText:"Rinnegan Pressure:\nThe first time each turn Pain is hit,\nreduce the damage by 10%",moves:[{name:"Shinra Tensei",cat:"N",power:55,acc:90,chk:40,desc:"AOE push; SPD -10 (2T)"},{name:"Bansho Tenin",cat:"N",power:45,acc:95,chk:25,desc:"Pull hit; Stun 30% (1T)"},{name:"Chakra Rods",cat:"N",power:50,acc:90,chk:30,desc:"Hit; Stun 40% (1T)"},{name:"Chibaku Tensei",cat:"N",power:90,acc:85,chk:70,desc:"AOE nuke; Pain -10 HP EOR (2T)"},{name:"Outer Path Revive",cat:"S",power:null,acc:100,chk:80,desc:"OP Revive (1x): revive recent dead (2R) to 50%; cost 40 true dmg each"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"a-raikage",name:"A (4th Raikage)",category:"Cloud",hp:280,chk:120,atk:145,ctr:105,def:132,spd:146,abilityText:"Lightning Armor:\nTake 15% less damage while above 50% HP",moves:[{name:"Lariat",cat:"T",power:45,acc:95,chk:20,desc:"Hit; Stun 20% (1T)"},{name:"Guillotine Drop",cat:"T",power:70,acc:90,chk:45,desc:"Heavy hit; DEF -15 (2T)"},{name:"Lightning Chop",cat:"T",power:40,acc:100,chk:20,desc:"Hit; Vulnerable (next hit +20% dmg, team)"},{name:"Lightning Armor Burst",cat:"S",power:null,acc:100,chk:35,desc:"Self buff (3T): ATK +15, DEF +10, SPD +10; Stun-immune (1T)"},{name:"Elbow Blitz",cat:"T",power:28,acc:100,chk:25,desc:"2-hit attack; if both hit: N/G locked (1T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kakashi",name:"Kakashi Hatake",category:"Leaf",hp:260,chk:135,atk:122,ctr:136,def:125,spd:140,abilityText:"Sharingan:\nThe first time an enemy uses a move,\nKakashi stores it.\nOnce per battle, Kakashi may use\nCopy to cast the stored move with -10% accuracy",moves:[{name:"Chidori",cat:"N",power:55,acc:95,chk:35,desc:"Hit"},{name:"Kamui",cat:"S",power:null,acc:100,chk:80,desc:"Kamui (1x): enemy under 35% HP dies"},{name:"Lightning Beast Fang",cat:"N",power:50,acc:90,chk:45,desc:"AOE; SPD -10 (2T)"},{name:"Thousand Years of Death",cat:"T",power:25,acc:95,chk:10,desc:"Hit; Stun 30% (1T)"},{name:"Mangekyo Sharingan",cat:"S",power:null,acc:100,chk:70,desc:"Remove ally or enemy (2T); if enemy: -10% HP/turn and Kakashi +10% HP/turn (2T) (1x)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"jiraiya",name:"Jiraiya",category:"Leaf",hp:270,chk:140,atk:120,ctr:138,def:125,spd:130,abilityText:"Toad Contract:\nWhile Gamabunta is active,\nJiraiya takes 15% less damage\nand his Ninjutsu costs 20% less CHK",moves:[{name:"Fire Style: Flame Bomb",cat:"N",power:60,acc:90,chk:35,desc:"Hit"},{name:"Toad Oil Flame Bullet",cat:"N",power:55,acc:90,chk:40,desc:"AOE; Poison 30%"},{name:"Dark Swamp",cat:"N",power:50,acc:90,chk:40,desc:"AOE; SPD -15 (2T)"},{name:"Summon: Gamabunta",cat:"S",power:null,acc:100,chk:45,desc:"Summon (3T): -15% dmg taken; ATK +10"},{name:"Toad Song Genjutsu",cat:"G",power:null,acc:80,chk:55,desc:"Disorient (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"naruto",name:"Naruto Uzumaki",category:"Leaf",hp:270,chk:150,atk:136,ctr:96,def:130,spd:136,abilityText:"Kurama Cloak:\nWhen Naruto drops below 30% HP (1x),\nheal 20% max HP and gain\nATK +20, CTR +40, DEF +20",moves:[{name:"Shadow Clone Jutsu",cat:"S",power:null,acc:100,chk:25,desc:"Create 1-hit clone (15 HP)"},{name:"Shadow Clone Barrage",cat:"T",power:30,acc:100,chk:20,desc:"Req clone: 2-hit attack"},{name:"Rasengan",cat:"N",power:75,acc:90,chk:45,desc:"Heavy hit"},{name:"Rasenshuriken",cat:"N",power:90,acc:85,chk:70,desc:"AOE nuke; Naruto Stun (1T); max 3 uses"},{name:"Uzumaki Rush",cat:"T",power:35,acc:100,chk:15,desc:"Hit; SPD -10 (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"gaara",name:"Gaara",category:"Sand",hp:280,chk:140,atk:105,ctr:129,def:150,spd:115,abilityText:"Shukaku Awakening:\nWhen Gaara drops below 30% HP (1x),\nPartial Transform (3T): DEF +20, CTR +25, ATK +10;\non trigger, apply BLIND -5 ACC (2T) to all enemies;\nGaara takes -5 HP EOR (3T)",moves:[{name:"Sand Coffin",cat:"N",power:45,acc:95,chk:30,desc:"Hit; MARKED (3T)"},{name:"Sand Burial",cat:"N",power:80,acc:90,chk:55,desc:"If target is MARKED: heavy hit"},{name:"Sand Tsunami",cat:"N",power:70,acc:90,chk:55,desc:"AOE; SPD -10 (2T)"},{name:"Sand Armor",cat:"S",power:null,acc:100,chk:35,desc:"Self buff (3T): DEF +20, SPD -10"},{name:"Desert Mirage",cat:"S",power:null,acc:100,chk:45,desc:"Team EVASION +15 (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"sasuke",name:"Sasuke Uchiha",category:"Leaf",hp:260,chk:135,atk:127,ctr:127,def:123,spd:134,abilityText:"Vengeance:\nWhen an ally dies, Sasuke gains ATK +10 and CTR +10\n(battle) (max 2 stacks)",moves:[{name:"Chidori",cat:"N",power:75,acc:90,chk:50,desc:"Heavy hit"},{name:"Fireball Jutsu",cat:"N",power:60,acc:90,chk:40,desc:"AOE"},{name:"Shuriken Jutsu",cat:"T",power:35,acc:95,chk:25,desc:"AOE; MARKED (3T)"},{name:"Sharingan Genjutsu",cat:"G",power:null,acc:85,chk:35,desc:"Disorient (1T)"},{name:"Amaterasu",cat:"N",power:55,acc:85,chk:55,desc:"Hit; Burn -5% HP EOR (permanent)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"itachi",name:"Itachi Uchiha",category:"Leaf",hp:250,chk:145,atk:110,ctr:138,def:118,spd:138,abilityText:"Genjutsu Master:\nItachi is immune to Genjutsu (Disorient).\nEnemies hit by Itachi's Genjutsu\ntake 10 true dmg EOR for 2 turns",moves:[{name:"Tsukuyomi",cat:"G",power:null,acc:80,chk:55,desc:"Disorient (3T)"},{name:"Fire Style: Phoenix Flame",cat:"N",power:45,acc:90,chk:35,desc:"AOE; MARKED (2T)"},{name:"Amaterasu",cat:"N",power:null,acc:85,chk:65,desc:"Hit; Burn -5% HP EOR (permanent)"},{name:"Susanoo Guard",cat:"S",power:null,acc:100,chk:40,desc:"Self buff (2T): DEF +20, EVASION +10"},{name:"Shuriken Shadow Clone",cat:"T",power:22,acc:100,chk:15,desc:"2-hit; MARKED (3T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"might-guy",name:"Might Guy",category:"Leaf",hp:260,chk:120,atk:148,ctr:98,def:128,spd:148,abilityText:"Eight Gates:\nOnce per battle, open Gates (3T):\nATK +25, SPD +20, EVASION +10, DEF -20;\ntake -10 HP EOR (3T)",moves:[{name:"Dynamic Entry",cat:"T",power:35,acc:100,chk:10,desc:"Hit; BLIND -10 ACC (1T)"},{name:"Leaf Hurricane",cat:"T",power:40,acc:95,chk:20,desc:"AOE"},{name:"Primary Lotus",cat:"T",power:75,acc:90,chk:45,desc:"Heavy hit; Stun 20% (1T)"},{name:"Gate Release",cat:"S",power:null,acc:100,chk:35,desc:"Activate Eight Gates (3T)"},{name:"Night Guy",cat:"T",power:120,acc:75,chk:80,desc:"Ultimate hit; 75% ACC; Guy Stun (1T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kakuzu",name:"Kakuzu",category:"Other",hp:280,chk:130,atk:122,ctr:112,def:145,spd:112,abilityText:"Earth Grudge Fear:\n4 extra hearts.\nOn lethal dmg, consume 1 heart and\nrevive immediately at 25% HP (no cleanse).\nIf lethal occurs before Kakuzu acts that round,\nhe loses that action.",moves:[{name:"Fire Mask Blast",cat:"N",power:60,acc:90,chk:45,desc:"AOE"},{name:"Wind Mask Pressure",cat:"N",power:50,acc:90,chk:40,desc:"AOE; BLIND -10 ACC (2T)"},{name:"Lightning Mask Spear",cat:"N",power:65,acc:90,chk:50,desc:"Hit; Stun 20% (1T)"},{name:"Water Mask Torrent",cat:"N",power:55,acc:90,chk:45,desc:"AOE; SPD -10 (2T)"},{name:"Thread Stitching",cat:"S",power:null,acc:100,chk:35,desc:"Heal self 25 HP"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"yamato",name:"Yamato",category:"Leaf",hp:260,chk:130,atk:108,ctr:135,def:132,spd:120,abilityText:"Wood Style Control:\nWhen Yamato uses a Support move,\ngrant the target EVASION +10 (2T)",moves:[{name:"Wood Wall",cat:"N",power:null,acc:100,chk:25,desc:"Self DEF +15 (3T, stacks 3)"},{name:"Wood Binding",cat:"N",power:45,acc:95,chk:30,desc:"Hit; Stun 20% (1T)"},{name:"Deep Forest Emergence",cat:"N",power:60,acc:90,chk:50,desc:"AOE; SPD -10 (2T)"},{name:"Suppression Formation",cat:"S",power:null,acc:100,chk:35,desc:"Team DEF +10 (3T, stacks 3)"},{name:"Wood Clone",cat:"S",power:null,acc:100,chk:55,desc:"Create clone (30 HP)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"sakura",name:"Sakura Haruno",category:"Leaf",hp:240,chk:105,atk:134,ctr:148,def:120,spd:126,abilityText:"Medical Prodigy:\nSakura's heals restore +10 extra HP\nif the target is below 50% HP",moves:[{name:"Healing Jutsu",cat:"S",power:20,acc:100,chk:20,desc:"Heal ally 20 HP"},{name:"Emergency Surgery",cat:"S",power:35,acc:100,chk:40,desc:"Heal ally 35 HP; cleanse Poison + Burn"},{name:"Chakra Punch",cat:"T",power:40,acc:100,chk:20,desc:"Hit"},{name:"Ground Smash",cat:"T",power:45,acc:90,chk:35,desc:"AOE"},{name:"Strength of a Hundred",cat:"S",power:null,acc:100,chk:60,desc:"Self buff (battle): ATK +15, DEF +10; -5 HP EOR"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kabuto",name:"Kabuto Yakushi",category:"Other",hp:250,chk:140,atk:105,ctr:141,def:115,spd:124,abilityText:"Anatomy Expert:\nKabuto's Ninjutsu moves ignore 15% of the target's DEF",moves:[{name:"Chakra Scalpel",cat:"N",power:50,acc:95,chk:30,desc:"DEF -10 (2T) | Hit"},{name:"Poison Needle",cat:"N",power:25,acc:95,chk:20,desc:"Poison 50% | Hit"},{name:"Temple Strike",cat:"N",power:40,acc:95,chk:25,desc:"Stun 30% (1T) | Hit"},{name:"Cellular Regeneration",cat:"S",power:null,acc:100,chk:35,desc:"Heal self 20 HP"},{name:"Nerve Disruption Genjutsu",cat:"G",power:null,acc:80,chk:55,desc:"AOE; Disorient (1T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"obito",name:"Obito Uchiha",category:"Leaf",hp:200,chk:135,atk:118,ctr:139,def:118,spd:139,abilityText:"Kamui Intangibility:\nEvery 3 rounds,\nthe first hit Obito would take deals 0 damage",moves:[{name:"Warp Strike (Priority)",cat:"T",power:45,acc:95,chk:20,desc:"Priority hit; MARKED (3T)"},{name:"Fire Style: Great Fireball",cat:"N",power:60,acc:90,chk:40,desc:"AOE"},{name:"Kamui Phase",cat:"S",power:null,acc:100,chk:35,desc:"EVASION +20 (2T)"},{name:"Wood Style: Cutting Sprigs",cat:"N",power:55,acc:90,chk:45,desc:"AOE; SPD -10 (2T)"},{name:"Uchiha Return",cat:"S",power:null,acc:100,chk:70,desc:"Swap HP% with ally (1x)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"rock-lee",name:"Rock Lee",category:"Leaf",hp:250,chk:120,atk:132,ctr:94,def:128,spd:142,abilityText:"Hard Work:\nWhen Rock Lee uses a Taijutsu move,\ngain FOCUS +10 ACC (2T) (stacks 3)",moves:[{name:"Leaf Hurricane",cat:"T",power:40,acc:95,chk:20,desc:"AOE"},{name:"Primary Lotus",cat:"T",power:75,acc:90,chk:45,desc:"Heavy hit; Stun 20% (1T)"},{name:"Hidden Lotus",cat:"T",power:110,acc:80,chk:80,desc:"Ultimate hit; Lee Stun (1T)"},{name:"Gate of Opening",cat:"S",power:null,acc:100,chk:35,desc:"Self buff (3T): ATK +20, SPD +15, DEF -15; -5 HP EOR (3T)"},{name:"Leaf Whirlwind",cat:"T",power:35,acc:100,chk:15,desc:"Hit; SPD -10 (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"neji",name:"Neji Hyuga",category:"Leaf",hp:250,chk:120,atk:118,ctr:122,def:128,spd:140,abilityText:"Byakugan Precision:\nNeji's Taijutsu moves have +5 Base ACC\nand ignore 10% of target DEF",moves:[{name:"Gentle Fist",cat:"T",power:40,acc:100,chk:15,desc:"Hit; target CHK -10"},{name:"Eight Trigrams: 64 Palms",cat:"T",power:null,acc:90,chk:70,desc:"64-hit: 1 true dmg per hit; every 4 hits drain 1 CHK (total -16 CHK)"},{name:"Rotation",cat:"T",power:null,acc:100,chk:30,desc:"Self DEF +20 (1T); EVASION +10 for that move only"},{name:"Byakugan Focus",cat:"S",power:null,acc:100,chk:25,desc:"FOCUS +15 ACC (2T)"},{name:"Air Palm",cat:"T",power:45,acc:95,chk:20,desc:"Hit; MARKED (3T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"hinata",name:"Hinata Hyuga",category:"Leaf",hp:270,chk:140,atk:108,ctr:128,def:118,spd:125,abilityText:"Protective Byakugan:\nOnce per round, when an ally is targeted\nby a single-target move,\ngrant them EVASION +10 for that move only",moves:[{name:"Gentle Step",cat:"T",power:35,acc:100,chk:15,desc:"Hit; target CHK -8"},{name:"Twin Lion Fists",cat:"T",power:70,acc:90,chk:45,desc:"Heavy hit; target CHK -12"},{name:"Protective Stance",cat:"S",power:null,acc:100,chk:30,desc:"Grant ally DEF +10 (3T, stacks 3)"},{name:"Byakugan Focus",cat:"S",power:null,acc:100,chk:25,desc:"Self FOCUS +15 ACC (2T)"},{name:"Air Palm",cat:"T",power:40,acc:95,chk:20,desc:"Hit; MARKED (3T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"suigetsu",name:"Suigetsu Hozuki",category:"Mist",hp:250,chk:120,atk:125,ctr:110,def:123,spd:122,abilityText:"Liquid Body:\nTake 20% less damage from Taijutsu moves",moves:[{name:"Executioner Slash",cat:"T",power:75,acc:90,chk:40,desc:"Heavy hit; MARKED (2T)"},{name:"Water Arm Smash",cat:"T",power:45,acc:95,chk:25,desc:"Hit; DEF -10 (2T)"},{name:"Water Wave",cat:"N",power:55,acc:90,chk:45,desc:"AOE; SPD -10 (2T)"},{name:"Liquefy",cat:"S",power:null,acc:100,chk:30,desc:"Self EVASION +15 (2T); cleanse Poison"},{name:"Water Clone",cat:"S",power:null,acc:100,chk:50,desc:"Create clone (25 HP)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"choji",name:"Choji Akimichi",category:"Leaf",hp:290,chk:110,atk:138,ctr:85,def:136,spd:110,abilityText:"Calorie Control:\nOnce per battle, when Choji drops below 40% HP,\nheal 20% max HP and gain ATK +15, DEF +15 (3T)",moves:[{name:"Human Boulder",cat:"T",power:45,acc:95,chk:25,desc:"AOE"},{name:"Spiky Human Boulder",cat:"T",power:55,acc:90,chk:40,desc:"AOE; MARKED (2T)"},{name:"Butterfly Punch",cat:"T",power:75,acc:90,chk:45,desc:"Heavy hit; Vulnerable (next hit +20% dmg, team)"},{name:"Calorie Chips",cat:"S",power:null,acc:100,chk:35,desc:"Heal self 25 HP"},{name:"Partial Expansion",cat:"S",power:null,acc:100,chk:30,desc:"Self DEF +15 (3T, stacks 3)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"hiruzen",name:"Hiruzen Sarutobi",category:"Leaf",hp:240,chk:130,atk:105,ctr:132,def:115,spd:120,abilityText:"Professor:\nHiruzen's Ninjutsu moves cost\n15% less CHK (rounded down)",moves:[{name:"Fire Style: Dragon Flame",cat:"N",power:55,acc:90,chk:40,desc:"AOE"},{name:"Earth Style: Mud Wall",cat:"N",power:null,acc:100,chk:30,desc:"Self DEF +15 (3T, stacks 3)"},{name:"Wind Style: Shuriken Storm",cat:"N",power:45,acc:90,chk:35,desc:"AOE; MARKED (2T)"},{name:"Lightning Style: Shock Blade",cat:"N",power:60,acc:90,chk:45,desc:"Hit; Stun 20% (1T)"},{name:"Reaper Seal",cat:"S",power:null,acc:85,chk:90,desc:"Execute (1x): if target below 30% HP, KO; otherwise deal 40 dmg"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"mei",name:"Mei Terumi",category:"Mist",hp:250,chk:140,atk:95,ctr:133,def:110,spd:118,abilityText:"Acidic Aftertaste:\nThe first enemy Mei hits each round\ntakes 6 true dmg EOR for 2 turns",moves:[{name:"Lava Style: Quicklime",cat:"N",power:55,acc:90,chk:40,desc:"Hit; Burn -3% HP EOR (3T)"},{name:"Boil Release: Mist",cat:"N",power:null,acc:90,chk:45,desc:"AOE; BLIND -10 ACC (2T)"},{name:"Water Style: Water Dragon",cat:"N",power:60,acc:90,chk:50,desc:"AOE"},{name:"Hidden Mist Jutsu",cat:"S",power:null,acc:100,chk:40,desc:"Team EVASION +10 (2T)"},{name:"Acid Vapor Blast",cat:"N",power:70,acc:85,chk:65,desc:"AOE; Burn -3% HP EOR (3T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"sasori",name:"Sasori",category:"Sand",hp:240,chk:135,atk:95,ctr:120,def:130,spd:118,abilityText:"Living Puppet:\nSasori is immune to Poison.\nThe first time he would die, set HP to 25% instead (1x)",moves:[{name:"Iron Sand Assault",cat:"N",power:55,acc:90,chk:40,desc:"Hit; MARKED (3T)"},{name:"Poison Needle Barrage",cat:"N",power:25,acc:90,chk:25,desc:"AOE; Poison 50%"},{name:"Puppet Swarm",cat:"N",power:50,acc:90,chk:45,desc:"AOE; DEF -10 (2T)"},{name:"Hiruko Shell",cat:"S",power:null,acc:100,chk:35,desc:"Self DEF +15 (3T, stacks 3)"},{name:"Hundred Puppets",cat:"N",power:90,acc:85,chk:75,desc:"AOE nuke; 85% ACC"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"utakata",name:"Utakata",category:"Mist",hp:240,chk:140,atk:90,ctr:130,def:110,spd:126,abilityText:"Bubble Counter:\nWhen Utakata is hit by a Taijutsu move,\napply Poison to the attacker\n(6 dmg EOR, permanent, non-stack)",moves:[{name:"Bubble Shot",cat:"N",power:45,acc:95,chk:30,desc:"Hit; BLIND -10 ACC (2T)"},{name:"Soap Bubble Trap",cat:"N",power:35,acc:90,chk:30,desc:"Hit; Stun 20% (1T)"},{name:"Bubble Minefield",cat:"N",power:55,acc:90,chk:45,desc:"AOE; MARKED (2T)"},{name:"Version 2 Bubble Cloak",cat:"S",power:null,acc:100,chk:55,desc:"Transform (battle): CTR +20, DEF +10, SPD +10; take 5 dmg EOR"},{name:"Tailed Bubble Burst",cat:"N",power:90,acc:85,chk:75,desc:"AOE nuke; 85% ACC"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"jugo",name:"Jugo",category:"Other",hp:270,chk:120,atk:140,ctr:70,def:140,spd:110,abilityText:"Unstable Surge:\nOnce per round, the first time Jugo takes damage,\ngain +8 CHK and FOCUS +15 (2T),\nthen take 4 dmg immediately.",moves:[{name:"Brutal Palm Strike",cat:"T",power:45,acc:95,chk:20,desc:"Stun 20% (1T) | Hit"},{name:"Rage Uppercut",cat:"T",power:75,acc:90,chk:45,desc:"MARKED (2T) | Heavy hit"},{name:"Arm Cannon Smash",cat:"T",power:55,acc:90,chk:40,desc:"AOE"},{name:"Natural Energy Mutation",cat:"S",power:null,acc:100,chk:55,desc:"Transform (battle)"},{name:"Berserk Lunge (Priority)",cat:"T",power:85,acc:90,chk:50,desc:"PRIORITY | Heavy hit; SPD -10 (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"onoki",name:"Onoki",category:"Stone",hp:240,chk:145,atk:75,ctr:146,def:118,spd:100,abilityText:"Earth Style Specialist:\nOnoki's Earth Style moves deal +15% damage.",moves:[{name:"Dust Release: Atomic Dismantling",cat:"N",power:95,acc:85,chk:80,desc:"Hit; 85% ACC"},{name:"Earth Style: Stone Golem",cat:"N",power:null,acc:100,chk:35,desc:"Self DEF +15 (3T, stacks 3)"},{name:"Weighted Boulder Jutsu",cat:"N",power:45,acc:90,chk:40,desc:"AOE; SPD -10 (2T)"},{name:"Light-Weight Technique",cat:"S",power:null,acc:100,chk:25,desc:"FOCUS +15 (2T) | Self"},{name:"Stone Shuriken Barrage",cat:"N",power:40,acc:90,chk:35,desc:"MARKED (2T) | AOE"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"asuma",name:"Asuma Sarutobi",category:"Leaf",hp:240,chk:120,atk:112,ctr:109,def:115,spd:124,abilityText:"Wind Blades:\nAsuma's Taijutsu hits apply MARKED (2T)\n25% of the time (refresh-only).",moves:[{name:"Chakra Blade Slash",cat:"T",power:45,acc:100,chk:15,desc:"Hit"},{name:"Twin Blade Rush",cat:"T",power:55,acc:95,chk:25,desc:"Stun 20% (1T) | Hit"},{name:"Wind Cutter",cat:"N",power:55,acc:90,chk:45,desc:"AOE"},{name:"Smoke Screen",cat:"S",power:null,acc:90,chk:35,desc:"BLIND -15 ACC (2T) | AOE"},{name:"Decapitation Strike",cat:"T",power:85,acc:85,chk:55,desc:"Hit; 85% ACC; +20% dmg vs MARKED targets"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"konan",name:"Konan",category:"Mist",hp:240,chk:140,atk:82,ctr:128,def:110,spd:120,abilityText:"Paper Affinity:\nKonan takes 20% less damage from\nNinjutsu moves that are not Fire,\nbut takes 20% more damage from Fire Ninjutsu.",moves:[{name:"Paper Shuriken Storm",cat:"N",power:50,acc:90,chk:35,desc:"MARKED (2T) | AOE"},{name:"Paper Bomb Wings",cat:"N",power:60,acc:90,chk:50,desc:"AOE; Burn -3% HP EOR (3T)"},{name:"Paper Clone",cat:"S",power:null,acc:100,chk:45,desc:"Create clone (25 HP)"},{name:"Paper Body Regeneration",cat:"S",power:15,acc:100,chk:40,desc:"Heal self 15 HP; Regen 6 HP EOR (3T)"},{name:"Ocean of Paper",cat:"N",power:90,acc:85,chk:75,desc:"AOE nuke; 85% ACC"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"sai",name:"Sai",category:"Leaf",hp:230,chk:130,atk:100,ctr:116,def:110,spd:125,abilityText:"Ink Tactics:\nWhen Sai applies MARKED,\nalso reduce the target's EVA\nby an additional -5 for 2 turns.",moves:[{name:"Beast Scroll: Lion",cat:"N",power:55,acc:90,chk:40,desc:"MARKED (3T) | Hit"},{name:"Beast Scroll: Serpent",cat:"N",power:40,acc:90,chk:35,desc:"Stun 20% (1T) | Hit"},{name:"Beast Scroll: Flood",cat:"N",power:50,acc:90,chk:45,desc:"AOE; SPD -10 (2T)"},{name:"Ink Evasion",cat:"S",power:null,acc:100,chk:30,desc:"EVASION +15 (2T) | Self"},{name:"Beast Scroll: Birds",cat:"N",power:55,acc:90,chk:45,desc:"MARKED (2T) | AOE"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"shizune",name:"Shizune",category:"Leaf",hp:250,chk:130,atk:75,ctr:134,def:110,spd:122,abilityText:"Poison Specialist:\nShizune's Poison is deadlier\n(10 dmg EOR, permanent, non-stack).\nHer Poison applications have +15% chance\nto apply (capped at 95%).",moves:[{name:"Medical Ninjutsu",cat:"S",power:20,acc:100,chk:20,desc:"Heal ally 20 HP"},{name:"Poison Senbon",cat:"N",power:25,acc:95,chk:20,desc:"Poison 50% | Hit"},{name:"Poison Cloud",cat:"N",power:45,acc:90,chk:45,desc:"AOE; Poison 40%"},{name:"Antidote Injection",cat:"S",power:10,acc:100,chk:35,desc:"Heal 10 HP; Cleanse Poison + Burn | Ally"},{name:"Chakra Scalpel Assist",cat:"T",power:35,acc:95,chk:25,desc:"DEF -10 (2T) | Hit"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"shino",name:"Shino Aburame",category:"Leaf",hp:240,chk:125,atk:92,ctr:125,def:112,spd:118,abilityText:"Kikaichu Drain:\nWhen Shino hits with a Bug Ninjutsu move,\ndrain 4 CHK from each enemy hit and\nrestore that amount to Shino (no cap).",moves:[{name:"Bug Swarm Bite",cat:"N",power:45,acc:95,chk:25,desc:"Hit; target CHK -10"},{name:"Parasitic Beetle Spread",cat:"N",power:45,acc:90,chk:45,desc:"AOE; Poison 30%"},{name:"Insect Cocoon",cat:"N",power:null,acc:100,chk:30,desc:"Self DEF +15 (3T, stacks 3)"},{name:"Kikaichu Purge",cat:"S",power:null,acc:100,chk:35,desc:"Cleanse self Poison + Burn; EVASION +10 (2T)"},{name:"Raging Beetle Wave",cat:"N",power:55,acc:90,chk:55,desc:"AOE; MARKED (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"temari",name:"Temari",category:"Sand",hp:240,chk:125,atk:90,ctr:115,def:110,spd:128,abilityText:"Wind Pressure:\nTemari's Wind Ninjutsu hits apply\nBLIND -10 ACC (2T) 30% of the time (refresh-only).",moves:[{name:"Wind Scythe",cat:"N",power:55,acc:90,chk:35,desc:"Hit; MARKED (2T)"},{name:"Cyclone Burst",cat:"N",power:55,acc:90,chk:45,desc:"AOE; SPD -10 (2T)"},{name:"Dust Whirl",cat:"N",power:null,acc:90,chk:40,desc:"AOE; BLIND -10 ACC (2T)"},{name:"Tailwind Formation",cat:"S",power:null,acc:100,chk:40,desc:"Team SPD +10 (3T, stacks 3)"},{name:"Summoning: Kamatari",cat:"N",power:85,acc:85,chk:70,desc:"AOE nuke; 85% ACC"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"karin",name:"Karin Uzumaki",category:"Leaf",hp:240,chk:130,atk:70,ctr:133,def:112,spd:118,abilityText:"Sensory Specialist:\nKarin's Accuracy cannot be reduced\n(immune to BLIND and any -ACC effects).",moves:[{name:"Sensory Scan",cat:"S",power:null,acc:100,chk:35,desc:"FOCUS +15 (2T) | Team"},{name:"Healing Bite",cat:"S",power:40,acc:100,chk:40,desc:"Heal ally 40 HP; Karin -10 HP"},{name:"Chakra Chains",cat:"N",power:45,acc:90,chk:40,desc:"Hit; MARKED (3T)"},{name:"Chakra Suppression Seal",cat:"N",power:55,acc:90,chk:55,desc:"AOE; SPD -10 (2T)"},{name:"Spirit Snap",cat:"N",power:null,acc:85,chk:45,desc:"Hit; Disorient (1T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"shikamaru",name:"Shikamaru Nara",category:"Leaf",hp:230,chk:125,atk:80,ctr:126,def:110,spd:126,abilityText:"Shadow Tactician:\nWhile any Shadow Link is active,\nafter Shikamaru uses a Support move,\napply Shadow Link (1T) to 1 additional enemy\n(max 3 linked total).\nIf Shikamaru takes damage, all Links end immediately.",moves:[{name:"Shadow Possession",cat:"G",power:null,acc:85,chk:55,desc:"Hit; 85% ACC; Shadow Link (1T): target cannot act"},{name:"Shadow Stitching",cat:"N",power:45,acc:90,chk:35,desc:"Hit; Stun 20% (1T)"},{name:"Tactical Command",cat:"S",power:null,acc:100,chk:40,desc:"FOCUS +15 (2T) | Team"},{name:"Shadow Screen",cat:"S",power:null,acc:90,chk:40,desc:"BLIND -15 ACC (2T) | AOE"},{name:"Shadow Strangle",cat:"N",power:60,acc:85,chk:55,desc:"Hit; 85% ACC; SPD -10 (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"ino",name:"Ino Yamanaka",category:"Leaf",hp:220,chk:120,atk:90,ctr:131,def:110,spd:118,abilityText:"Mind Link:\nThe first time each round Ino hits an enemy with Genjutsu,\napply MARKED (2T) to that enemy.",moves:[{name:"Mind Transfer",cat:"G",power:null,acc:80,chk:55,desc:"Hit; 80% ACC; Mind Transfer: spend 20 CHK at end of turn"},{name:"Mind Disruption",cat:"G",power:null,acc:85,chk:45,desc:"AOE; Disorient (1T)"},{name:"Team Coordination",cat:"S",power:null,acc:100,chk:35,desc:"FOCUS +15 (2T) | Team"},{name:"Sensory Relay",cat:"S",power:null,acc:100,chk:40,desc:"Team EVASION +10 (2T)"},{name:"Psychic Shockwave",cat:"N",power:45,acc:90,chk:55,desc:"AOE; MARKED (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kankuro",name:"Kankuro",category:"Sand",hp:230,chk:125,atk:80,ctr:128,def:110,spd:118,abilityText:"Puppet Frame:\nKankuro takes 20% less damage from Ninjutsu moves.",moves:[{name:"Puppet Strike",cat:"N",power:45,acc:95,chk:25,desc:"Hit; MARKED (2T)"},{name:"Poison Blades",cat:"N",power:30,acc:95,chk:25,desc:"Hit; Poison 50%"},{name:"Black Ant Trap",cat:"N",power:55,acc:85,chk:45,desc:"Hit; 85% ACC; Stun 20% (1T)"},{name:"Puppet Shield (Priority)",cat:"S",power:null,acc:100,chk:35,desc:"PRIORITY | Guard: for this turn, Kankuro takes 0 damage"},{name:"Iron Maiden Crush",cat:"N",power:85,acc:85,chk:70,desc:"Hit; 85% ACC; if target is MARKED, deal +20% damage"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"zetsu",name:"Zetsu",category:"Other",hp:250,chk:110,atk:88,ctr:120,def:110,spd:118,abilityText:"Dual Body:\nAt the start of battle, Zetsu splits into two bodies.",moves:[{name:"Ambush Strike",cat:"T",power:35,acc:95,chk:20,desc:"Hit; MARKED (2T)"},{name:"Bodyguard Spores",cat:"S",power:null,acc:100,chk:35,desc:"PRIORITY | redirect the next single-target hit to this body"},{name:"Parasitic Bind",cat:"N",power:40,acc:90,chk:35,desc:"Hit; Stun 20% (1T)"},{name:"Chakra Leech",cat:"N",power:35,acc:95,chk:30,desc:"Hit; target CHK -15; Zetsu +15 CHK"},{name:"Chakra Transfer",cat:"S",power:null,acc:100,chk:45,desc:"Transfer 40 CHK to an ally"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kurenai",name:"Kurenai Yuhi",category:"Leaf",hp:220,chk:120,atk:78,ctr:130,def:110,spd:120,abilityText:"Genjutsu Specialist:\nKurenai's Genjutsu moves cost\n20% less CHK (rounded down).",moves:[{name:"Illusion: Flower Trap",cat:"G",power:null,acc:85,chk:65,desc:"Hit; 85% ACC; Stun (2T)"},{name:"Illusion: False Surroundings",cat:"G",power:null,acc:100,chk:55,desc:"AOE; Trap Illusion (this turn only)"},{name:"Petal Shuriken",cat:"N",power:40,acc:90,chk:35,desc:"AOE; MARKED (2T)"},{name:"Genjutsu Veil",cat:"S",power:null,acc:100,chk:40,desc:"Team EVASION +10 (2T)"},{name:"Tree Bind Illusion",cat:"G",power:null,acc:85,chk:55,desc:"Hit; 85% ACC; Stun 20% (1T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"baki",name:"Baki",category:"Sand",hp:220,chk:120,atk:100,ctr:108,def:112,spd:118,abilityText:"Ambush Footwork:\nIf Baki acts before his target (higher SPD),\nhis attack deals +20% damage.",moves:[{name:"Wind Blade Slash",cat:"N",power:65,acc:85,chk:45,desc:"Hit; 85% ACC"},{name:"Sandstorm Gale",cat:"N",power:50,acc:90,chk:45,desc:"AOE; BLIND -15 ACC (2T)"},{name:"Quickdraw Kunai",cat:"T",power:35,acc:95,chk:15,desc:"Hit; Stun 20% (1T)"},{name:"Desert Footwork",cat:"S",power:null,acc:100,chk:30,desc:"EVASION +15 (2T) | Self"},{name:"Slicing Cyclone",cat:"N",power:55,acc:90,chk:55,desc:"AOE; SPD -10 (2T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"kiba",name:"Kiba Inuzuka",category:"Leaf",hp:230,chk:110,atk:108,ctr:86,def:112,spd:132,abilityText:"Akamaru Senses:\nKiba's Accuracy cannot be reduced\n(immune to BLIND and any -ACC effects).\nKiba's crit chance is doubled.",moves:[{name:"Fang Over Fang",cat:"T",power:45,acc:95,chk:25,desc:"AOE; SPD -10 (2T)"},{name:"Wolf Fang Barrage",cat:"T",power:28,acc:100,chk:20,desc:"Hit; 2-hit"},{name:"Akamaru Assist",cat:"S",power:null,acc:100,chk:35,desc:"Self ATK +15 (3T, stacks 3)"},{name:"Beast Scent Mark",cat:"S",power:30,acc:95,chk:20,desc:"MARKED (3T) | Hit"},{name:"Ferocious Pounce",cat:"T",power:75,acc:85,chk:55,desc:"Hit; 85% ACC; Stun 20% (1T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"deidara",name:"Deidara",category:"Stone",hp:230,chk:135,atk:85,ctr:107,def:105,spd:115,abilityText:"Living Explosives:\nDeidara's Ninjutsu hits apply Burn -3% HP EOR (3T)\n30% of the time (refresh-only).",moves:[{name:"C1 Clay Birds",cat:"N",power:45,acc:90,chk:40,desc:"AOE; MARKED (2T)"},{name:"C2 Clay Dragon",cat:"N",power:55,acc:90,chk:55,desc:"AOE; SPD -10 (2T)"},{name:"C3 Mega Bomb",cat:"N",power:85,acc:85,chk:75,desc:"AOE nuke; 85% ACC"},{name:"Clay Clone",cat:"S",power:null,acc:100,chk:55,desc:"Create clone (25 HP)"},{name:"C0 Final Detonation (1x)",cat:"N",power:null,acc:95,chk:100,desc:"Self-destruct (1x): deal 120 damage to all enemies; Deidara dies"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"chiyo",name:"Lady Chiyo",category:"Sand",hp:220,chk:120,atk:70,ctr:147,def:110,spd:105,abilityText:"Puppet Matriarch:\nOnce per battle, when an ally would die,\nprevent it and set them to 1 HP instead.",moves:[{name:"Chakra Threads",cat:"S",power:null,acc:100,chk:40,desc:"Team DEF +10 (3T, stacks 3)"},{name:"Medical Puppet Repair",cat:"S",power:25,acc:100,chk:35,desc:"Heal ally 25 HP"},{name:"Puppet Barrage",cat:"N",power:45,acc:90,chk:45,desc:"AOE; MARKED (2T)"},{name:"Antidote Puppet",cat:"S",power:10,acc:100,chk:40,desc:"Cleanse ally Poison + Burn; heal 10 HP"},{name:"Ten Puppets: Siege",cat:"N",power:80,acc:85,chk:75,desc:"AOE nuke; 85% ACC"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"hidan",name:"Hidan",category:"Other",hp:210,chk:150,atk:112,ctr:80,def:150,spd:110,abilityText:"Immortal Body:\nOnce per battle, lethal damage sets Hidan to 1 HP instead,\nimmediately ends Ritual Circle (if active) and\nremoves any active Shared Pain link.\nHidan becomes Severed (2T):\ntakes +20% damage, deals -15% damage,\nand cannot use Ritual moves.",moves:[{name:"Triple-Scythe Slash",cat:"T",power:28,acc:100,chk:20,desc:"Hit; 2-hit"},{name:"Bloodletting Cut",cat:"T",power:45,acc:95,chk:25,desc:"Hit; Bleeding (3T)"},{name:"Ritual Circle",cat:"S",power:null,acc:100,chk:40,desc:"Hidan takes -20% damage; enables Curse: Shared Pain"},{name:"Curse: Shared Pain",cat:"N",power:null,acc:85,chk:55,desc:"Target share 50% of damage taken"},{name:"Finishing Reap",cat:"T",power:75,acc:85,chk:45,desc:"Hit; 85% ACC"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]},
+  {id:"tenten",name:"Tenten",category:"Leaf",hp:220,chk:110,atk:85,ctr:114,def:110,spd:124,abilityText:"Twin Scroll Mastery:\nTenten's Taijutsu moves never miss.\nTenten's crit chance is tripled.",moves:[{name:"Kunai Volley",cat:"T",power:40,acc:95,chk:25,desc:"AOE"},{name:"Chain Sickle Snare",cat:"T",power:35,acc:95,chk:25,desc:"Hit; Stun 20% (1T)"},{name:"Giant Fan Smash",cat:"T",power:45,acc:90,chk:40,desc:"AOE; SPD -10 (2T)"},{name:"Scroll Arsenal",cat:"S",power:null,acc:100,chk:25,desc:"Self buff (2 uses): next 2 Taijutsu moves hit twice"},{name:"Explosive Tag Barrage",cat:"N",power:55,acc:85,chk:65,desc:"AOE; 85% ACC; Burn -3% HP EOR (3T)"},{name:"Kunai Throw",cat:"T",power:10,acc:100,chk:0,desc:"Free basic attack"}]}
+];
+
+const VILLAGES = ['All','Leaf','Sand','Mist','Cloud','Stone','Other'];
+const VILLAGE_COLORS = {Leaf:'var(--village-leaf)',Sand:'var(--village-sand)',Mist:'var(--village-mist)',Cloud:'var(--village-cloud)',Stone:'var(--village-stone)',Other:'var(--village-other)'};
+const STAT_MAX = 150;
+const STAT_KEYS = ['hp','chk','atk','ctr','def','spd'];
+const HP_MAX = 300;
+
+const STAT_RANGES = {
+  hp:  {min:200, max:290},
+  chk: {min:105, max:150},
+  atk: {min:70,  max:150},
+  ctr: {min:70,  max:150},
+  def: {min:105, max:150},
+  spd: {min:100, max:150}
+};
+
+function statColor(key, val) {
+  const r = STAT_RANGES[key];
+  const t = Math.max(0, Math.min(1, (val - r.min) / (r.max - r.min)));
+  if (t < 0.35) {
+    return lerpColor([200,60,50], [210,170,50], t/0.35);
+  } else if (t < 0.65) {
+    return lerpColor([210,170,50], [100,170,70], (t-0.35)/0.3);
+  } else {
+    return lerpColor([100,170,70], [50,160,80], (t-0.65)/0.35);
+  }
+}
+
+function lerpColor(a, b, t) {
+  return `rgb(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)})`;
+}
+
+const filtersEl = document.getElementById('filters');
+const gridEl = document.getElementById('grid');
+const countEl = document.getElementById('count');
+const searchEl = document.getElementById('search');
+
+let activeVillage = 'All';
+
+VILLAGES.forEach(v => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (v === 'All' ? ' active' : '');
+  btn.textContent = v;
+  btn.addEventListener('click', () => {
+    activeVillage = v;
+    filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.textContent === v));
+    render();
+  });
+  filtersEl.appendChild(btn);
+});
+
+searchEl.addEventListener('input', render);
+
+function render() {
+  const q = searchEl.value.toLowerCase().trim();
+  const filtered = NINJAS.filter(n => {
+    if (activeVillage !== 'All' && n.category !== activeVillage) return false;
+    if (q) {
+      const inName = n.name.toLowerCase().includes(q);
+      const inMove = n.moves.some(m => m.name.toLowerCase().includes(q));
+      const inAbility = n.abilityText.toLowerCase().includes(q);
+      if (!inName && !inMove && !inAbility) return false;
+    }
+    return true;
+  });
+
+  countEl.textContent = filtered.length + ' shinobi';
+
+  gridEl.innerHTML = '';
+  filtered.forEach(n => {
+    const card = document.createElement('div');
+    card.className = 'ninja-card';
+
+    const avgStat = (n.atk + n.ctr + n.def + n.spd) / 4;
+    const pips = [
+      {pct: n.hp/HP_MAX, col: statColor('hp', n.hp)},
+      {pct: n.chk/STAT_MAX, col: statColor('chk', n.chk)},
+      {pct: avgStat/STAT_MAX, col: statColor('atk', avgStat)}
+    ];
+
+    card.innerHTML = `
+      <div class="card-header">
+        ${portraitHTML(n.id, n.name)}
+        <div class="village-pip" style="background:${VILLAGE_COLORS[n.category] || VILLAGE_COLORS.Other}"></div>
+        <div class="card-name">${n.name}</div>
+        <div class="card-village">${n.category}</div>
+        <div class="stat-pips">
+          ${pips.map(p => `<div class="stat-pip"><div class="fill" style="transform:scaleX(${Math.min(p.pct,1)});background:${p.col}"></div></div>`).join('')}
+        </div>
+        <svg class="expand-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="stats-panel">
+            ${STAT_KEYS.map(k => {
+              const max = k === 'hp' ? HP_MAX : STAT_MAX;
+              const pct = Math.min(n[k] / max * 100, 100);
+              const col = statColor(k, n[k]);
+              return `<div class="stat-row">
+                <div class="stat-label">${k}</div>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${pct}%;background:${col}"></div></div>
+                <div class="stat-val" style="color:${col}">${n[k]}</div>
+              </div>`;
+            }).join('')}
+            <div class="ability-box">
+              <div class="ability-title">Passive</div>
+              <div class="ability-desc">${n.abilityText}</div>
+            </div>
+          </div>
+          <div class="moves-panel">
+            <div class="moves-heading">Moves</div>
+            ${n.moves.map(m => `
+              <div class="move-row">
+                <div class="move-cat move-cat-${m.cat}">${m.cat}</div>
+                <div class="move-info">
+                  <div class="move-name">${m.name}</div>
+                  <div class="move-desc">${m.desc}</div>
+                </div>
+                <div class="move-stats">${m.power != null ? m.power + ' pw' : '—'} &middot; ${m.acc}% &middot; ${m.chk} chk</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+
+    card.querySelector('.card-header').addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+
+    gridEl.appendChild(card);
+  });
+
+  if (!filtered.length) {
+    gridEl.innerHTML = '<div class="no-results">No shinobi match your search.</div>';
+  }
+}
+
+render();
+</script>
+
+</body>
 </html>
