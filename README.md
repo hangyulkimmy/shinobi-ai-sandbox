@@ -1,6 +1,6 @@
 # Shinobi AI Sandbox
 
-**[▶ Play it](https://hangyulkimmy.github.io/shinobi-ai-sandbox/)**
+**[Play it](https://hangyulkimmy.github.io/shinobi-ai-sandbox/)**
 
 A turn-based Naruto battle simulator. Pick teams from 48 ninjas, then watch (or play) a fight where every AI opponent has its own fighting style.
 
@@ -8,10 +8,10 @@ A turn-based Naruto battle simulator. Pick teams from 48 ninjas, then watch (or 
 
 ## What's in it
 
-- **Battle Sim** — team builder → battle screen. Turn order, ATK/DEF/CTR stats, damage formula, status effects, clone mechanics, passives.
-- **Shinobi Codex** — a browsable roster of every character and their moves.
-- **AI with personalities** — each ninja's AI scores its available moves (damage, kill-secure, healing, buffs, targeting) and weights those categories differently by style, e.g. aggressive vs. supportive. Same roster, different fights.
-- **Move parser** — move effects are written as text in the data file and parsed into typed effects at runtime, so adding a character is a data change, not a code change.
+- **Battle Sim**, team builder → battle screen. Turn order, ATK/DEF/CTR stats, damage formula, status effects, clone mechanics, passives.
+- **Shinobi Codex**, a browsable roster of every character and their moves.
+- **AI with personalities**, each ninja's AI scores its available moves (damage, kill-secure, healing, buffs, targeting) and weights those categories differently by style, e.g. aggressive vs. supportive. Same roster, different fights.
+- **Move parser**, move effects are written as text in the data file and parsed into typed effects at runtime, so adding a character is a data change, not a code change.
 
 ## Structure
 
